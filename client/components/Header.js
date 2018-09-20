@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
-import query from '../queries/CurrentUser';
 import CurrentUser from '../queries/CurrentUser';
 
 
 class Header extends Component {
-    render() {
-        console.log(this.props.data);
+    renderButtons() {
 
-        if( this.props.data.loading) return (<div> </div>);
-        
+        const { loading, user } = this.props.data;
+
+        if (loading) { return <div />; }
+
+        if(user) {
+            return <div> Hi { user.id } Logout </div>;
+        } else {
+            return (
+                <div> You are not signed in. </div>
+            );
+        }
+    };
+
+    render() {        
         return (
-            <div>
-                Header
-            </div>
+            <nav>
+                <div className="nav-wrapper">
+                    { this.renderButtons() }
+                </div>
+            </nav>
         );
     }
 }
