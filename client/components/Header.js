@@ -8,9 +8,7 @@ class Header extends Component {
     onLogoutClick() {
         this.props.mutate({
             refetchQueries: [{ query }]
-        }).catch(res => {
-            const errors = res.graphqlQLErrors.map(error => error.message);
-        });
+        })
     }
 
     renderButtons() {
