@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient, { createNetworkInterface } from 'apollo-client';
+import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
@@ -10,16 +10,15 @@ import SingupForm from './components/SignupForm';
 import Dashboard from './components/Dashboard';
 import requireAuth from './components/requireAuth';
 
-const networkInterface = createNetworkInterface({
-  uri: '/graphql',
-  opts: {
-    credentials: 'same-origin',
-  },
-  pollInterval: 10000,
-});
+// const networkInterface = createNetworkInterface({
+//   uri: '/graphql',
+//   opts: {
+//     credentials: 'same-origin',
+//   },
+//   pollInterval: 10000,
+// });
 
 const client = new ApolloClient({
-  networkInterface,
   dataIdFromObject: o => o.id
 });
 
