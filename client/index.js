@@ -1,25 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient from 'apollo-boost';
+import ApolloClient from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
-
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { HttpLink } from 'apollo-link-http';
 import App from './components/App';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import Dashboard from './components/Dashboard';
 import requireAuth from './components/requireAuth';
 
-// const networkInterface = createNetworkInterface({
-//   uri: '/graphql',
-//   opts: {
-//     credentials: 'same-origin',
-//   },
-//   pollInterval: 10000,
-// });
+
+const link = new HttpLink({
+  uri: '/graphql',
+  // Additional fetch options like `credentials` or `headers`
+  credentials: 'same-origin',
+});
+
+const cache = new InMemoryCache({
+  dataIdFromObject: object => object.key || null
+});
 
 const client = new ApolloClient({
-  dataIdFromObject: o => o.id
+  link,
+  cache
 });
 
 const Root = () => {
