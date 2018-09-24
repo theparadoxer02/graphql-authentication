@@ -22,7 +22,7 @@ class SignupForm extends Component {
         }
     }
 
-    onSubmit({email, password}) {
+    handleSubmit({email, password}) {
         this.props.mutate({
             variables: { email, password },
             refetchQueries: [{ query }]
@@ -39,7 +39,7 @@ class SignupForm extends Component {
                 <h3> Sign Up </h3>
                 <AuthForm
                     errors={ this.state.errors } 
-                    onSubmit={this.onSubmit.bind(this)} 
+                    handleSubmit={this.handleSubmit.bind(this)} 
                 />
             </div>
         );
